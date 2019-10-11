@@ -31,9 +31,9 @@ class Automata:
 
     def __repr__(self):
         representation = [
+            f'alphabet: {{ {", ".join(map(str, self.get_alphabet()))} }}',
             f'states: {{ {", ".join(map(str, self.states))} }}',
             f'start state: {str(self.start_state)}',
-            f'final state: {{ {", ".join(map(str, self.final_states))} }}',
             f'final states: {{ {", ".join(map(str, self.final_states))} }}',
             f'transitions:',
         ]
@@ -204,6 +204,16 @@ class Automata:
                     *to_states[to_state])
 
         return reindexed
+
+    def get_alphabet(self) -> Set[str]:
+        alphabet = set()
+
+        for from_state, to_states in self.transitions.items():
+            for to_state in to_states:
+                for input_str in to_states[to_state]:
+                    alphabet.add(input_str)
+
+        return alphabet
 
     def set_start_state(self, state: int) -> None:
         self.start_state = state
