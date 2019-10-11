@@ -3,7 +3,7 @@ from itertools import chain
 from typing import Dict, List, Optional, Set
 
 ALPHABET = [chr(i) for i in chain(range(48, 58), range(65, 91), range(97, 123))]
-EPSILON = '~'
+EPSILON = 'ε'
 OP_CONCAT = '.'
 OP_KLEENE_PLUS = '+'
 OP_KLEENE_STAR = '*'
@@ -34,6 +34,7 @@ class Automata:
             f'states: {{ {", ".join(map(str, self.states))} }}',
             f'start state: {str(self.start_state)}',
             f'final state: {{ {", ".join(map(str, self.final_states))} }}',
+            f'final states: {{ {", ".join(map(str, self.final_states))} }}',
             f'transitions:',
         ]
 
