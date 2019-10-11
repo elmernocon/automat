@@ -21,7 +21,6 @@ class Automata:
     start_state: Optional[int]
     final_states: Optional[Set[int]]
     transitions: Dict[int, Dict[int, Set[str]]]
-    alphabet = Set[str]
 
     def __init__(self):
         self.states = set()
