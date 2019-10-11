@@ -148,7 +148,7 @@ class Automata:
 
     @staticmethod
     def create_struct(input_str: str) -> Automata:
-        if str not in ALPHABET:
+        if input_str not in ALPHABET:
             raise SyntaxError
 
         automata = Automata()
