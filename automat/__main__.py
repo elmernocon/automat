@@ -2,6 +2,16 @@ from automat import Automaton
 
 
 def main():
+    regular_expressions = ['ab*', '(ab)*c', 'a?']
+
+    for regular_expression in regular_expressions:
+        automaton = Automaton.create_from_regex(regular_expression)
+        print(regular_expression)
+        print(automaton)
+        print()
+
+
+def sample():
     # 0
     zero = Automaton.create_struct('0')
     print('0')

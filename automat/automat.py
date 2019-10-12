@@ -81,6 +81,97 @@ class Automaton:
         return concat
 
     @staticmethod
+    def create_from_regex(regex: str) -> Automaton:
+
+        prev_char = EPSILON
+        operator_stack = []
+        automata_stack = []
+
+        def process_operator(operator: str) -> None:
+            len_automata_stack = len(automata_stack)
+            if len_automata_stack == 0:
+                raise Exception(f'Error processing "{operator}" operator. automata_stack is empty.')
+            if operator in OPERANDS_SINGLE:
+                a = automata_stack.pop()
+                if operator == OP_KLEENE_PLUS:
+                    automata_stack.append(Automaton.create_kleene_plus(a))
+                elif operator == OP_KLEENE_STAR:
+                    automata_stack.append(Automaton.create_kleene_star(a))
+                elif operator == OP_OPTIONAL:
+                    automata_stack.append(Automaton.create_optional(a))
+            elif operator in OPERANDS_DOUBLE:
+                if len_automata_stack < 2:
+                    raise Exception(f'Error processing "{operator}" operator. Inadequate operands.')
+                b = automata_stack.pop()
+                a = automata_stack.pop()
+                if operator == OP_CONCAT:
+                    automata_stack.append(Automaton.create_concat(a, b))
+                elif operator == OP_UNION:
+                    automata_stack.append(Automaton.create_union(a, b))
+
+        def add_operator(operator: str) -> None:
+            len_operator_stack = len(operator_stack)
+            while True:
+                if len_operator_stack == 0:
+                    break
+                top = operator_stack[-1]
+                if top == PARENTHESIS_OPEN:
+                    break
+                if top == OP_CONCAT or top == operator:
+                    op = operator_stack.pop()
+                    process_operator(op)
+                else:
+                    break
+            operator_stack.append(operator)
+
+        for char in regex:
+            if char in ALPHABET:
+                if (prev_char != OP_CONCAT and
+                        (prev_char in ALPHABET or prev_char in [PARENTHESIS_CLOSE, *OPERANDS_SINGLE])):
+                    add_operator(OP_CONCAT)
+                automata_stack.append(Automaton.create_struct(char))
+            elif char == PARENTHESIS_OPEN:
+                if (prev_char != OP_CONCAT and
+                        (prev_char in ALPHABET or prev_char in [PARENTHESIS_CLOSE, *OPERANDS_SINGLE])):
+                    add_operator(OP_CONCAT)
+                operator_stack.append(PARENTHESIS_OPEN)
+            elif char == PARENTHESIS_CLOSE:
+                if prev_char in OPERANDS_DOUBLE:
+                    raise Exception(f'Error processing "{char}" after "{prev_char}".')
+                while True:
+                    if len(operator_stack) == 0:
+                        raise Exception(f'Error processing "{char}" operator. operator_stack is empty.')
+                    oper = operator_stack.pop()
+                    if oper == PARENTHESIS_OPEN:
+                        break
+                    elif oper in OPERANDS_DOUBLE:
+                        process_operator(oper)
+            elif char in OPERANDS_SINGLE:
+                if (prev_char == PARENTHESIS_OPEN or
+                        prev_char in OPERANDS_SINGLE or
+                        prev_char in OPERANDS_DOUBLE):
+                    raise Exception(f'Error processing "{char}" after "{prev_char}".')
+                process_operator(char)
+            elif char in OPERANDS_DOUBLE:
+                if (prev_char in OPERANDS_SINGLE or
+                        prev_char in OPERANDS_DOUBLE):
+                    raise Exception(f'Error processing "{char}" after "{prev_char}".')
+                add_operator(char)
+            else:
+                raise Exception(f'Symbol "{char}" is not allowed.')
+
+            prev_char = char
+
+        while len(operator_stack) != 0:
+            oper = operator_stack.pop()
+            process_operator(oper)
+
+        if len(automata_stack) > 1:
+            raise Exception(f'Unable to parse "{regex}" regular expression.')
+
+        return automata_stack.pop()
+
+    @staticmethod
     def create_kleene_plus(automaton: Automaton) -> Automaton:
         reindexed = Automaton.reindex(automaton, 2)
 
