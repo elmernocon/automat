@@ -15,7 +15,7 @@ PARENTHESIS_CLOSE = ')'
 PARENTHESIS_OPEN = '('
 
 
-class Automata:
+class Automaton:
 
     states: Set[int]
     start_state: Optional[int]
@@ -56,14 +56,14 @@ class Automata:
                f'{("))" if is_final else ") ")}'
 
     @staticmethod
-    def create_concat(automata_1: Automata, automata_2: Automata) -> Automata:
-        reindexed_1 = Automata.reindex(automata_1, 2)
-        reindexed_2 = Automata.reindex(automata_2, len(reindexed_1.states) + 2)
+    def create_concat(automaton_1: Automaton, automaton_2: Automaton) -> Automaton:
+        reindexed_1 = Automaton.reindex(automaton_1, 2)
+        reindexed_2 = Automaton.reindex(automaton_2, len(reindexed_1.states) + 2)
 
         start_state = 1
         end_state = len(reindexed_1.states) + len(reindexed_2.states) + 2
 
-        concat = Automata()
+        concat = Automaton()
         concat.set_start_state(start_state)
         concat.add_final_state(end_state)
 
@@ -81,13 +81,13 @@ class Automata:
         return concat
 
     @staticmethod
-    def create_kleene_plus(automata: Automata) -> Automata:
-        reindexed = Automata.reindex(automata, 2)
+    def create_kleene_plus(automaton: Automaton) -> Automaton:
+        reindexed = Automaton.reindex(automaton, 2)
 
         start_state = 1
         end_state = len(reindexed.states) + 2
 
-        kleene_plus = Automata()
+        kleene_plus = Automaton()
         kleene_plus.set_start_state(start_state)
         kleene_plus.add_final_state(end_state)
 
@@ -102,13 +102,13 @@ class Automata:
         return kleene_plus
 
     @staticmethod
-    def create_kleene_star(automata: Automata) -> Automata:
-        reindexed = Automata.reindex(automata, 2)
+    def create_kleene_star(automaton: Automaton) -> Automaton:
+        reindexed = Automaton.reindex(automaton, 2)
 
         start_state = 1
         end_state = len(reindexed.states) + 2
 
-        kleene_star = Automata()
+        kleene_star = Automaton()
         kleene_star.set_start_state(start_state)
         kleene_star.add_final_state(end_state)
 
@@ -125,13 +125,13 @@ class Automata:
         return kleene_star
 
     @staticmethod
-    def create_optional(automata: Automata) -> Automata:
-        reindexed = Automata.reindex(automata, 2)
+    def create_optional(automaton: Automaton) -> Automaton:
+        reindexed = Automaton.reindex(automaton, 2)
 
         start_state = 1
         end_state = len(reindexed.states) + 2
 
-        optional = Automata()
+        optional = Automaton()
         optional.set_start_state(start_state)
         optional.add_final_state(end_state)
 
@@ -147,26 +147,26 @@ class Automata:
         return optional
 
     @staticmethod
-    def create_struct(input_str: str) -> Automata:
+    def create_struct(input_str: str) -> Automaton:
         if input_str not in ALPHABET:
             raise SyntaxError
 
-        automata = Automata()
-        automata.set_start_state(1)
-        automata.add_final_state(2)
-        automata.add_transition(1, 2, input_str)
+        automaton = Automaton()
+        automaton.set_start_state(1)
+        automaton.add_final_state(2)
+        automaton.add_transition(1, 2, input_str)
 
-        return automata
+        return automaton
 
     @staticmethod
-    def create_union(automata_1: Automata, automata_2: Automata) -> Automata:
-        reindexed_1 = Automata.reindex(automata_1, 2)
-        reindexed_2 = Automata.reindex(automata_2, len(reindexed_1.states) + 2)
+    def create_union(automaton_1: Automaton, automaton_2: Automaton) -> Automaton:
+        reindexed_1 = Automaton.reindex(automaton_1, 2)
+        reindexed_2 = Automaton.reindex(automaton_2, len(reindexed_1.states) + 2)
 
         start_state = 1
         end_state = len(reindexed_1.states) + len(reindexed_2.states) + 2
 
-        union = Automata()
+        union = Automaton()
 
         union.set_start_state(start_state)
         union.add_final_state(end_state)
@@ -186,16 +186,16 @@ class Automata:
         return union
 
     @staticmethod
-    def reindex(automata: Automata, start_index: int = 1) -> Automata:
+    def reindex(automaton: Automaton, start_index: int = 1) -> Automaton:
         index = start_index
         mapping = {}
-        for i in automata.states:
+        for i in automaton.states:
             mapping[i] = index
             index += 1
-        reindexed = Automata()
-        reindexed.set_start_state(mapping[automata.start_state])
-        reindexed.add_final_states([mapping[final_state] for final_state in automata.final_states])
-        for from_state, to_states in automata.transitions.items():
+        reindexed = Automaton()
+        reindexed.set_start_state(mapping[automaton.start_state])
+        reindexed.add_final_states([mapping[final_state] for final_state in automaton.final_states])
+        for from_state, to_states in automaton.transitions.items():
             for to_state in to_states:
                 reindexed.add_transition(
                     mapping[from_state],
@@ -240,7 +240,7 @@ class Automata:
                 to_state: inputs
             }
 
-    def copy_transitions(self, automata: Automata) -> None:
-        for from_state, to_states in automata.transitions.items():
+    def copy_transitions(self, automaton: Automaton) -> None:
+        for from_state, to_states in automaton.transitions.items():
             for to_state in to_states:
                 self.add_transition(from_state, to_state, *to_states[to_state])

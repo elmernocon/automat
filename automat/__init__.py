@@ -1,1 +1,1 @@
-from .automat import Automata, ALPHABET
+from .automat import Automaton, ALPHABET
