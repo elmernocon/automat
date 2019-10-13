@@ -7,7 +7,6 @@ def main():
         '1+1*',                             # L(M2)
         '01*101+',                          # L(M3)
         '1(00)*1',                          # L(M4)
-        '1(00)*1',                          # L(M4)
         '(10+1+1*)|(01*101+)|(1(00)*1)',    # L(M5)
 
         '101',                              # L(M1)
@@ -17,9 +16,12 @@ def main():
         '(10111*)|(0*1010*0*11*0*)',        # L(M5)
     ]
 
-    for regular_expression in regular_expressions:
+    for i, regular_expression in enumerate(regular_expressions, start=1):
         automaton = Automaton.create_from_regex(regular_expression)
-        print(f'{regular_expression.replace("+", "<sup>+</sup>").replace("*", "<sup>*</sup>")}')
+        print('<code>')
+        print(f'{i}. {regular_expression.replace("+", "<sup>+</sup>").replace("*", "<sup>*</sup>")}')
+        print('</code>')
+        print()
         print('```')
         print(automaton)
         print('```')

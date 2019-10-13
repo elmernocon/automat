@@ -1,6 +1,9 @@
-10<sup>+</sup>
+<code>
+1. 10<sup>+</sup>
+</code>
+
 ```
-alphabet: { 0, ε, 1 }
+alphabet: { 1, ε, 0 }
 states: { 1, 2, 3, 4, 5, 6, 7, 8 }
 start state: 1
 final states: { 8 }
@@ -15,9 +18,12 @@ transitions:
     ( 005 )  -- 0 -->   ( 006 ) 
 ```
 
-1<sup>+</sup>1<sup>*</sup>
+<code>
+2. 1<sup>+</sup>1<sup>*</sup>
+</code>
+
 ```
-alphabet: { ε, 1 }
+alphabet: { 1, ε }
 states: { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
 start state: 1
 final states: { 10 }
@@ -36,9 +42,12 @@ transitions:
     ( 007 )  -- 1 -->   ( 008 ) 
 ```
 
-01<sup>*</sup>101<sup>+</sup>
+<code>
+3. 01<sup>*</sup>101<sup>+</sup>
+</code>
+
 ```
-alphabet: { 0, ε, 1 }
+alphabet: { 1, ε, 0 }
 states: { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22 }
 start state: 1
 final states: { 22 }
@@ -69,9 +78,12 @@ transitions:
     ( 019 )  -- 1 -->   ( 020 ) 
 ```
 
-1(00)<sup>*</sup>1
+<code>
+4. 1(00)<sup>*</sup>1
+</code>
+
 ```
-alphabet: { 0, ε, 1 }
+alphabet: { 1, ε, 0 }
 states: { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }
 start state: 1
 final states: { 16 }
@@ -95,35 +107,12 @@ transitions:
     ( 014 )  -- 1 -->   ( 015 ) 
 ```
 
-1(00)<sup>*</sup>1
-```
-alphabet: { 0, ε, 1 }
-states: { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }
-start state: 1
-final states: { 16 }
-transitions:
-  > ( 001 )  -- ε -->   ( 002 ) 
-    ( 013 )  -- ε -->   ( 014 ) 
-    ( 015 )  -- ε -->  (( 016 ))
-    ( 002 )  -- ε -->   ( 003 ) 
-    ( 004 )  -- ε -->   ( 005 ) 
-    ( 012 )  -- ε -->   ( 013 ) 
-    ( 003 )  -- 1 -->   ( 004 ) 
-    ( 005 )  -- ε -->   ( 006 ) 
-    ( 005 )  -- ε -->   ( 012 ) 
-    ( 011 )  -- ε -->   ( 005 ) 
-    ( 011 )  -- ε -->   ( 012 ) 
-    ( 006 )  -- ε -->   ( 007 ) 
-    ( 008 )  -- ε -->   ( 009 ) 
-    ( 010 )  -- ε -->   ( 011 ) 
-    ( 007 )  -- 0 -->   ( 008 ) 
-    ( 009 )  -- 0 -->   ( 010 ) 
-    ( 014 )  -- 1 -->   ( 015 ) 
-```
+<code>
+5. (10<sup>+</sup>1<sup>+</sup>1<sup>*</sup>)|(01<sup>*</sup>101<sup>+</sup>)|(1(00)<sup>*</sup>1)
+</code>
 
-(10<sup>+</sup>1<sup>+</sup>1<sup>*</sup>)|(01<sup>*</sup>101<sup>+</sup>)|(1(00)<sup>*</sup>1)
 ```
-alphabet: { 0, ε, 1 }
+alphabet: { 1, ε, 0 }
 states: { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62 }
 start state: 1
 final states: { 62 }
@@ -202,9 +191,12 @@ transitions:
     ( 059 )  -- 1 -->   ( 060 ) 
 ```
 
-101
+<code>
+6. 101
+</code>
+
 ```
-alphabet: { 0, ε, 1 }
+alphabet: { 1, ε, 0 }
 states: { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
 start state: 1
 final states: { 10 }
@@ -220,9 +212,12 @@ transitions:
     ( 008 )  -- 1 -->   ( 009 ) 
 ```
 
-11<sup>*</sup>
+<code>
+7. 11<sup>*</sup>
+</code>
+
 ```
-alphabet: { ε, 1 }
+alphabet: { 1, ε }
 states: { 1, 2, 3, 4, 5, 6, 7, 8 }
 start state: 1
 final states: { 8 }
@@ -238,9 +233,12 @@ transitions:
     ( 005 )  -- 1 -->   ( 006 ) 
 ```
 
-0<sup>*</sup>1010<sup>*</sup>
+<code>
+8. 0<sup>*</sup>1010<sup>*</sup>
+</code>
+
 ```
-alphabet: { 0, ε, 1 }
+alphabet: { 1, ε, 0 }
 states: { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22 }
 start state: 1
 final states: { 22 }
@@ -272,9 +270,12 @@ transitions:
     ( 019 )  -- 0 -->   ( 020 ) 
 ```
 
-0<sup>*</sup>11<sup>*</sup>0<sup>*</sup>
+<code>
+9. 0<sup>*</sup>11<sup>*</sup>0<sup>*</sup>
+</code>
+
 ```
-alphabet: { 0, ε, 1 }
+alphabet: { 1, ε, 0 }
 states: { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 }
 start state: 1
 final states: { 20 }
@@ -306,9 +307,12 @@ transitions:
     ( 017 )  -- 0 -->   ( 018 ) 
 ```
 
-(10111<sup>*</sup>)|(0<sup>*</sup>1010<sup>*</sup>0<sup>*</sup>11<sup>*</sup>0<sup>*</sup>)
+<code>
+10. (10111<sup>*</sup>)|(0<sup>*</sup>1010<sup>*</sup>0<sup>*</sup>11<sup>*</sup>0<sup>*</sup>)
+</code>
+
 ```
-alphabet: { 0, ε, 1 }
+alphabet: { 1, ε, 0 }
 states: { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66 }
 start state: 1
 final states: { 66 }
