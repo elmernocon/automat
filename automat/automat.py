@@ -52,7 +52,7 @@ class Automaton:
         is_final = state in self.final_states
         return f'{">" if is_start else " "}' \
                f'{("((" if is_final else " (")} ' \
-               f'{str(state)} ' \
+               f'{str(state).rjust(3, "0")} ' \
                f'{("))" if is_final else ") ")}'
 
     @staticmethod
