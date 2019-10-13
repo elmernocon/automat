@@ -110,9 +110,8 @@ class Automaton:
                     automata_stack.append(Automaton.create_union(a, b))
 
         def add_operator(operator: str) -> None:
-            len_operator_stack = len(operator_stack)
             while True:
-                if len_operator_stack == 0:
+                if len(operator_stack) == 0:
                     break
                 top = operator_stack[-1]
                 if top == PARENTHESIS_OPEN:
