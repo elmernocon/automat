@@ -19,8 +19,10 @@ def main():
 
     for regular_expression in regular_expressions:
         automaton = Automaton.create_from_regex(regular_expression)
-        print(regular_expression)
+        print(f'{regular_expression.replace("+", "<sup>+</sup>").replace("*", "<sup>*</sup>")}')
+        print('```')
         print(automaton)
+        print('```')
         print()
 
 
