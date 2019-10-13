@@ -2,7 +2,20 @@ from automat import Automaton
 
 
 def main():
-    regular_expressions = ['ab*', '(ab)*c', 'a?']
+    regular_expressions = [
+        '10+',                              # L(M1)
+        '1+1*',                             # L(M2)
+        '01*101+',                          # L(M3)
+        '1(00)*1',                          # L(M4)
+        '1(00)*1',                          # L(M4)
+        '(10+1+1*)|(01*101+)|(1(00)*1)',    # L(M5)
+
+        '101',                              # L(M1)
+        '11*',                              # L(M2)
+        '0*1010*',                          # L(M3)
+        '0*11*0*',                          # L(M4)
+        '(10111*)|(0*1010*0*11*0*)',        # L(M5)
+    ]
 
     for regular_expression in regular_expressions:
         automaton = Automaton.create_from_regex(regular_expression)
