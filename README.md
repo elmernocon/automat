@@ -1,4 +1,5 @@
 # Automata Project
+
 ## Running the project
 1. Make sure you are using python 3.7
 -> A virtual environment was created with a python 3.7 engine with all requirements installed.
@@ -12,7 +13,7 @@ source env/bin/activate
 
 3. Run the application
 ```
-python app.py
+python automat/app.py
 ```
 
 4. Go to the browser with the link speicified by the app
