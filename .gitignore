@@ -248,7 +248,7 @@ dmypy.json
 pyvenv.cfg
 .env
 .venv
-env/
+# env/
 venv/
 ENV/
 env.bak/
