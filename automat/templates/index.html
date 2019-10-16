@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Automata Project</title>
+  </head>
+  <body>
+      <center>
+        <h1>Transition Parser</h1>
+        <p style="background-color:Tomato;">{{error}}</p>
+      </center>
+      <style> 
+    textarea {
+      width: 50%;
+      height: 50px;
+      padding: 12px 20px;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+      font-size: 16px;
+      resize: none;
+    }
+    button {
+      width: 10%;
+      height: 40px;
+      padding: 12px 20px;
+    }
+  </style> 
+    <form method="POST" action="/">
+      <center>
+      <textarea type="text" name="textbox"></textarea>
+      </center>
+      <center>
+      <button type="submit">Submit</button>
+      <h3>Input:</h3>
+      <p>{{input}}</p>
+      <h3>Alphabets:</h3>
+      <p>{{alphabets}}</p>
+      <h3>States</h3>
+      <p>{{states}}</p>
+      <h3>Start</h3>
+      <p>{{start}}</p>
+      <h3>Final</h3>
+      <p>{{final}}</p>
+      <h3>Transition</h3>
+      <p>{{transitions|safe}}</p>
+      </center>
+    </form>
+  </body>
+</html>

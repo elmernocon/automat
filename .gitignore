@@ -248,7 +248,7 @@ dmypy.json
 pyvenv.cfg
 .env
 .venv
-env/
+# env/
 venv/
 ENV/
 env.bak/
@@ -293,3 +293,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/venv,linux,macos,python,windows,pycharm+all,visualstudiocode
+
+# Pycaches
+*/__pycache__
+
